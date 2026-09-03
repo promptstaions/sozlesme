@@ -81,10 +81,16 @@
     display:flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 0 64px;
+    margin: 0 0 10px;
   }
 
   .header-row h1{ margin:0; }
+
+  .last-updated{
+    font-size: 13px;
+    color: var(--text-dim);
+    margin: 0 0 56px;
+  }
 
   .about-btn{
     font-family: inherit;
@@ -164,6 +170,7 @@
     <h1>Monopoly Sözleşmesi</h1>
     <button id="aboutBtn" class="about-btn">Hakkında</button>
   </div>
+  <p id="lastUpdated" class="last-updated"></p>
   <div id="maddeler" class="maddeler"></div>
 </main>
 
@@ -176,6 +183,12 @@
 </div>
 
 <script>
+  // ---- SÖZLEŞMEYİ HER GÜNCELLEDİĞİNDE BU SATIRI DA DEĞİŞTİR ----
+  const sonGuncelleme = "3 Eylül 2026, 14:30";
+  // -----------------------------------------------------------------
+
+  document.getElementById('lastUpdated').textContent = "Son güncelleme: " + sonGuncelleme;
+
   // ---- YENİ MADDE EKLEMEK İÇİN BURAYA SATIR EKLE ----
   // Her tırnak içi bir madde. Sırayla listelenir.
   const maddeler = [
