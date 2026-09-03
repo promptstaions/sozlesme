@@ -157,50 +157,49 @@
     cursor: pointer;
   }
 
-  /* şakacı "reklam" bannerı */
-  .ad-banner{
+  /* kenarlardaki TikTok bannerları — gerçek profil görselini 4:3 kutuda gösterir */
+  .side-banner{
     position: fixed;
-    right: 18px;
-    bottom: 18px;
-    max-width: 220px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 170px;
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    background: linear-gradient(135deg, #FF2D55, #FF9500);
-    color: #fff;
+    gap: 8px;
     text-decoration: none;
-    padding: 14px 16px;
+    background: #111114;
+    border: 1px solid var(--line);
     border-radius: 14px;
-    box-shadow: 0 10px 30px -8px rgba(255,45,85,0.55);
-    animation: ad-pulse 2.4s ease-in-out infinite;
+    padding: 10px;
+    box-shadow: 0 20px 40px -20px rgba(0,0,0,0.6);
+    transition: transform 0.15s ease;
   }
 
-  .ad-tag{
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    opacity: 0.85;
+  .side-banner:hover{
+    transform: translateY(-50%) scale(1.03);
   }
 
-  .ad-text{
-    font-size: 13px;
-    font-weight: 600;
-    line-height: 1.4;
+  .side-banner-left{ left: 18px; }
+  .side-banner-right{ right: 18px; }
+
+  .side-banner-img{
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 10px;
+    display: block;
+    background: #222; /* resim yüklenene kadar görünen yer tutucu renk */
   }
 
-  @keyframes ad-pulse{
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.04); }
+  .side-banner-caption{
+    font-size: 12px;
+    color: var(--text-dim);
+    text-align: center;
   }
 
-  @media (max-width: 560px){
-    .ad-banner{
-      max-width: 160px;
-      padding: 10px 12px;
-      right: 12px;
-      bottom: 12px;
-    }
-    .ad-text{ font-size: 12px; }
+  /* dar ekranlarda içerikle çakışmasınlar diye gizle */
+  @media (max-width: 1000px){
+    .side-banner{ display: none; }
   }
 
   @media (max-width: 560px){
@@ -228,14 +227,19 @@
   </div>
 </div>
 
-<a href="https://www.tiktok.com/@cartelvarez" target="_blank" rel="noopener" class="ad-banner">
-  <span class="ad-tag">SPONSORLU</span>
-  <span class="ad-text"></span>
+<a href="https://www.tiktok.com/@KULLANICI_ADIN_1" target="_blank" rel="noopener" class="side-banner side-banner-left">
+  <img src="tiktok1.jpg" alt="TikTok hesabı 1" class="side-banner-img" />
+  <span class="side-banner-caption">@kullanici_adin_1</span>
+</a>
+
+<a href="https://www.tiktok.com/@KULLANICI_ADIN_2" target="_blank" rel="noopener" class="side-banner side-banner-right">
+  <img src="tiktok2.jpg" alt="TikTok hesabı 2" class="side-banner-img" />
+  <span class="side-banner-caption">@kullanici_adin_2</span>
 </a>
 
 <script>
   // ---- SÖZLEŞMEYİ HER GÜNCELLEDİĞİNDE BU SATIRI DA DEĞİŞTİR ----
-  const sonGuncelleme = "3 Eylül 2026, 16:57";
+  const sonGuncelleme = "3 Eylül 2026, 14:30";
   // -----------------------------------------------------------------
 
   document.getElementById('lastUpdated').textContent = "Son güncelleme: " + sonGuncelleme;
