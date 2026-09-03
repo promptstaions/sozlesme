@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>X Sözleşmesi</title>
+<style>
+  :root{
+    --bg: #0B0B0C;
+    --text: #F5F5F7;
+    --text-dim: #9A9AA1;
+    --line: rgba(255,255,255,0.09);
+  }
+
+  *{ box-sizing: border-box; }
+
+  html, body{
+    margin:0;
+    padding:0;
+    background: var(--bg);
+    color: var(--text);
+  }
+
+  body{
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+    min-height: 100vh;
+    display:flex;
+    justify-content:center;
+    padding: 100px 24px 120px;
+  }
+
+  main{
+    width:100%;
+    max-width: 620px;
+  }
+
+  h1{
+    font-size: 44px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0 0 64px;
+  }
+
+  .maddeler{
+    display:flex;
+    flex-direction:column;
+  }
+
+  .madde{
+    display:grid;
+    grid-template-columns: 34px 1fr;
+    gap: 16px;
+    padding: 22px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .madde:last-child{
+    border-bottom: 1px solid var(--line);
+  }
+
+  .madde-no{
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-dim);
+    padding-top: 2px;
+  }
+
+  .madde-body{
+    font-size: 17px;
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  .empty{
+    color: var(--text-dim);
+    font-size: 15px;
+    padding: 8px 0;
+  }
+
+  @media (max-width: 560px){
+    body{ padding: 64px 20px 80px; }
+    h1{ font-size: 32px; margin-bottom: 40px; }
+  }
+</style>
+</head>
+<body>
+
+<main>
+  <h1>X Sözleşmesi</h1>
+  <div id="maddeler" class="maddeler"></div>
+</main>
+
+<script>
+  // ---- YENİ MADDE EKLEMEK İÇİN BURAYA SATIR EKLE ----
+  // Her tırnak içi bir madde. Sırayla listelenir.
+  const maddeler = [
+    "Buraya ilk madde metni gelecek.",
+    "Buraya ikinci madde metni gelecek.",
+  ];
+  // ------------------------------------------------------
+
+  const el = document.getElementById('maddeler');
+
+  if (maddeler.length === 0) {
+    el.innerHTML = '<p class="empty">Henüz madde eklenmedi.</p>';
+  } else {
+    el.innerHTML = maddeler.map((text, i) => `
+      <div class="madde">
+        <div class="madde-no">${i + 1}</div>
+        <div class="madde-body">${text}</div>
+      </div>
+    `).join('');
+  }
+</script>
+
+</body>
+</html>
