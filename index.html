@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Monopoly Sözleşmesi</title>
+<title>X Sözleşmesi</title>
 <style>
   :root{
     --bg: #0B0B0C;
@@ -77,6 +77,80 @@
     padding: 8px 0;
   }
 
+  .header-row{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 64px;
+  }
+
+  .header-row h1{ margin:0; }
+
+  .about-btn{
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--text-dim);
+    background: transparent;
+    border: 1px solid var(--line);
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+
+  .about-btn:hover{
+    color: var(--text);
+    border-color: var(--text-dim);
+  }
+
+  /* Modal normalde GİZLİ: display none */
+  .modal-overlay{
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+
+  /* JS bu class'ı eklediğinde modal görünür olur */
+  .modal-overlay.open{
+    display: flex;
+  }
+
+  .modal-box{
+    position: relative;
+    background: #17171A;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 32px;
+    max-width: 420px;
+    width: 100%;
+  }
+
+  .modal-box h2{
+    font-size: 20px;
+    margin: 0 0 12px;
+  }
+
+  .modal-box p{
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-dim);
+    margin: 0;
+  }
+
+  .close-btn{
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    font-size: 22px;
+    cursor: pointer;
+  }
+
   @media (max-width: 560px){
     body{ padding: 64px 20px 80px; }
     h1{ font-size: 32px; margin-bottom: 40px; }
@@ -86,9 +160,20 @@
 <body>
 
 <main>
-  <h1>Monopoly Sözleşmesi</h1>
+  <div class="header-row">
+    <h1>X Sözleşmesi</h1>
+    <button id="aboutBtn" class="about-btn">Hakkında</button>
+  </div>
   <div id="maddeler" class="maddeler"></div>
 </main>
+
+<div id="aboutModal" class="modal-overlay">
+  <div class="modal-box">
+    <button id="closeBtn" class="close-btn">&times;</button>
+    <h2>Hakkında</h2>
+    <p>Bu sayfa, Monopoly Sözleşmesi'nin maddelerini listeler. Yeni bir madde eklenince güncellenir.</p>
+  </div>
+</div>
 
 <script>
   // ---- YENİ MADDE EKLEMEK İÇİN BURAYA SATIR EKLE ----
@@ -120,6 +205,26 @@
       </div>
     `).join('');
   }
+
+  // --- Hakkında modalını aç/kapat ---
+  const aboutBtn = document.getElementById('aboutBtn');
+  const aboutModal = document.getElementById('aboutModal');
+  const closeBtn = document.getElementById('closeBtn');
+
+  aboutBtn.addEventListener('click', () => {
+    aboutModal.classList.add('open');
+  });
+
+  closeBtn.addEventListener('click', () => {
+    aboutModal.classList.remove('open');
+  });
+
+  // Kutunun dışına (siyah alana) tıklanınca da kapansın
+  aboutModal.addEventListener('click', (e) => {
+    if (e.target === aboutModal) {
+      aboutModal.classList.remove('open');
+    }
+  });
 </script>
 
 </body>
