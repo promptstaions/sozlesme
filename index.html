@@ -157,55 +157,6 @@
     cursor: pointer;
   }
 
-  /* kenarlardaki TikTok bannerları — gerçek profil görselini 4:3 kutuda gösterir */
-  .side-banner{
-    position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 170px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    text-decoration: none;
-    background: #111114;
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    padding: 10px;
-    box-shadow: 0 20px 40px -20px rgba(0,0,0,0.6);
-    transition: transform 0.15s ease;
-  }
-
-  .side-banner:hover{
-    transform: translateY(-50%) scale(1.03);
-  }
-
-  .side-banner-left{ left: 18px; }
-  .side-banner-right{ right: 18px; }
-
-  .side-banner-img{
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    border-radius: 10px;
-    display: block;
-    background: #222; /* resim yüklenene kadar görünen yer tutucu renk */
-  }
-
-  .side-banner-caption{
-    font-size: 12px;
-    color: var(--text-dim);
-    text-align: center;
-  }
-
-  /* dar ekranlarda içerikle çakışmasınlar diye gizle */
-  @media (max-width: 1000px){
-    .side-banner{ display: none; }
-  }
-
-  @media (max-width: 560px){
-    body{ padding: 64px 20px 80px; }
-    h1{ font-size: 32px; margin-bottom: 40px; }
-  }
 </style>
 </head>
 <body>
