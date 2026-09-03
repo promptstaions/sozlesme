@@ -157,6 +157,52 @@
     cursor: pointer;
   }
 
+  /* şakacı "reklam" bannerı */
+  .ad-banner{
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    max-width: 220px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: linear-gradient(135deg, #FF2D55, #FF9500);
+    color: #fff;
+    text-decoration: none;
+    padding: 14px 16px;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px -8px rgba(255,45,85,0.55);
+    animation: ad-pulse 2.4s ease-in-out infinite;
+  }
+
+  .ad-tag{
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    opacity: 0.85;
+  }
+
+  .ad-text{
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  @keyframes ad-pulse{
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.04); }
+  }
+
+  @media (max-width: 560px){
+    .ad-banner{
+      max-width: 160px;
+      padding: 10px 12px;
+      right: 12px;
+      bottom: 12px;
+    }
+    .ad-text{ font-size: 12px; }
+  }
+
   @media (max-width: 560px){
     body{ padding: 64px 20px 80px; }
     h1{ font-size: 32px; margin-bottom: 40px; }
@@ -182,9 +228,14 @@
   </div>
 </div>
 
+<a href="https://www.tiktok.com/@cartelvarez" target="_blank" rel="noopener" class="ad-banner">
+  <span class="ad-tag">SPONSORLU</span>
+  <span class="ad-text"></span>
+</a>
+
 <script>
   // ---- SÖZLEŞMEYİ HER GÜNCELLEDİĞİNDE BU SATIRI DA DEĞİŞTİR ----
-  const sonGuncelleme = "3 Eylül 2026, 14:30";
+  const sonGuncelleme = "3 Eylül 2026, 16:57";
   // -----------------------------------------------------------------
 
   document.getElementById('lastUpdated').textContent = "Son güncelleme: " + sonGuncelleme;
