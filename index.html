@@ -81,16 +81,10 @@
     display:flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 0 10px;
+    margin: 0 0 64px;
   }
 
   .header-row h1{ margin:0; }
-
-  .last-updated{
-    font-size: 13px;
-    color: var(--text-dim);
-    margin: 0 0 56px;
-  }
 
   .about-btn{
     font-family: inherit;
@@ -159,6 +153,8 @@
 
   /* ============================================
      FOTO BANNER SİSTEMİ — yeniden kullanılabilir
+     Foto kendi gerçek piksel boyutunda görünür,
+     hiçbir kırpma/oran zorlaması yok.
      Yeni bir foto eklemek istediğinde: aşağıdaki
      HTML bloğunu (</body>'den hemen önceki <div
      class="photo-banner">...</div>) kopyala,
@@ -168,23 +164,17 @@
      ============================================ */
   .photo-banner{
     position: fixed;
-    width: 1000px; /* eskisi 200px'ti, 5 katı */
   }
 
   .photo-banner img{
-    width: 100%;
-    aspect-ratio: 678 / 426; /* fotoğrafların gerçek boyutu */
-    object-fit: cover;
-    border-radius: 12px;
     display: block;
+    border-radius: 12px;
     border: 1px solid var(--line);
     box-shadow: 0 20px 40px -20px rgba(0,0,0,0.6);
-    background: #222; /* resim yüklenene kadar görünen yer tutucu renk */
   }
 
-  /* dar ekranlarda içerikle çakışmasın diye gizle
-     (banner artık 1000px genişlikte olduğu için eşik yükseltildi) */
-  @media (max-width: 2700px){
+  /* dar ekranlarda içerikle çakışmasın diye gizle */
+  @media (max-width: 1400px){
     .photo-banner{ display: none; }
   }
 </style>
@@ -196,7 +186,6 @@
     <h1>Monopoly Sözleşmesi</h1>
     <button id="aboutBtn" class="about-btn">Hakkında</button>
   </div>
-  <p id="lastUpdated" class="last-updated"></p>
   <div id="maddeler" class="maddeler"></div>
 </main>
 
@@ -214,12 +203,6 @@
 </div>
 
 <script>
-  // ---- SÖZLEŞMEYİ HER GÜNCELLEDİĞİNDE BU SATIRI DA DEĞİŞTİR ----
-  const sonGuncelleme = "3 Eylül 2026, 16:57";
-  // -----------------------------------------------------------------
-
-  document.getElementById('lastUpdated').textContent = "Son güncelleme: " + sonGuncelleme;
-
   // ---- YENİ MADDE EKLEMEK İÇİN BURAYA SATIR EKLE ----
   // Her tırnak içi bir madde. Sırayla listelenir.
   const maddeler = [
