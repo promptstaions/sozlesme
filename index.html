@@ -153,8 +153,9 @@
 
   /* ============================================
      FOTO BANNER SİSTEMİ — yeniden kullanılabilir
-     Foto kendi gerçek piksel boyutunda görünür,
-     hiçbir kırpma/oran zorlaması yok.
+     Boyutu SEN ayarlıyorsun: aşağıdaki "width"
+     satırındaki piksel değerini değiştir, o kadar.
+     Oran bozulmaz, resim kendi oranında küçülür/büyür.
      Yeni bir foto eklemek istediğinde: aşağıdaki
      HTML bloğunu (</body>'den hemen önceki <div
      class="photo-banner">...</div>) kopyala,
@@ -167,6 +168,8 @@
   }
 
   .photo-banner img{
+    width: 250px;   /* <<< BOYUTU DEĞİŞTİRMEK İÇİN BU SAYIYI DÜZENLE (piksel) */
+    height: auto;   /* resmin oranı bozulmasın diye otomatik hesaplanır */
     display: block;
     border-radius: 12px;
     border: 1px solid var(--line);
