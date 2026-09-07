@@ -157,6 +157,35 @@
     cursor: pointer;
   }
 
+  /* ============================================
+     FOTO BANNER SİSTEMİ — yeniden kullanılabilir
+     Yeni bir foto eklemek istediğinde: aşağıdaki
+     HTML bloğunu (</body>'den hemen önceki <div
+     class="photo-banner">...</div>) kopyala,
+     sadece src ve style="top:...; left:... veya
+     right:..." kısımlarını değiştir. Resmi de
+     GitHub reposuna yükle. CSS'e dokunmana gerek yok.
+     ============================================ */
+  .photo-banner{
+    position: fixed;
+    width: 200px;
+  }
+
+  .photo-banner img{
+    width: 100%;
+    aspect-ratio: 678 / 426; /* fotoğrafların gerçek boyutu */
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+    border: 1px solid var(--line);
+    box-shadow: 0 20px 40px -20px rgba(0,0,0,0.6);
+    background: #222; /* resim yüklenene kadar görünen yer tutucu renk */
+  }
+
+  /* dar ekranlarda içerikle çakışmasın diye gizle */
+  @media (max-width: 1000px){
+    .photo-banner{ display: none; }
+  }
 </style>
 </head>
 <body>
@@ -178,10 +207,18 @@
   </div>
 </div>
 
-
+<!-- SOL TARAFTAKİ FOTO — yes.jpg'yi bu dosyayla aynı klasöre (repo köküne) yükle -->
+<div class="photo-banner" style="top:50%; left:18px; transform: translateY(-50%);">
+  <img src="yes.jpg" alt="foto" />
+</div>
 
 <script>
-  
+  // ---- SÖZLEŞMEYİ HER GÜNCELLEDİĞİNDE BU SATIRI DA DEĞİŞTİR ----
+  const sonGuncelleme = "3 Eylül 2026, 16:57";
+  // -----------------------------------------------------------------
+
+  document.getElementById('lastUpdated').textContent = "Son güncelleme: " + sonGuncelleme;
+
   // ---- YENİ MADDE EKLEMEK İÇİN BURAYA SATIR EKLE ----
   // Her tırnak içi bir madde. Sırayla listelenir.
   const maddeler = [
