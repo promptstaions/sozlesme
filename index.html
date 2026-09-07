@@ -168,7 +168,7 @@
      ============================================ */
   .photo-banner{
     position: fixed;
-    width: 200px;
+    width: 1000px; /* eskisi 200px'ti, 5 katı */
   }
 
   .photo-banner img{
@@ -182,8 +182,9 @@
     background: #222; /* resim yüklenene kadar görünen yer tutucu renk */
   }
 
-  /* dar ekranlarda içerikle çakışmasın diye gizle */
-  @media (max-width: 1000px){
+  /* dar ekranlarda içerikle çakışmasın diye gizle
+     (banner artık 1000px genişlikte olduğu için eşik yükseltildi) */
+  @media (max-width: 2700px){
     .photo-banner{ display: none; }
   }
 </style>
