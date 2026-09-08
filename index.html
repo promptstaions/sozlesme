@@ -181,7 +181,12 @@
     .photo-banner{ display: none; }
   }
 
-  /* imleç arkasında parlayan (glow) çizgi efekti */
+  /* sol tık basılıyken (glow trail için) metin seçilmesin diye */
+  body.no-select{
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
   #cursorTrail{
     position: fixed;
     inset: 0;
@@ -290,11 +295,13 @@
   window.addEventListener('mousedown', (e) => {
     if (e.button !== 0) return; // sadece sol tık
     isFrozen = true;
+    document.body.classList.add('no-select'); // sürüklerken metin seçilmesin
     if (unfreezeTimer) clearTimeout(unfreezeTimer); // önceki bırakma zamanlayıcısını iptal et
   });
 
   window.addEventListener('mouseup', (e) => {
     if (e.button !== 0) return; // sadece sol tık
+    document.body.classList.remove('no-select'); // seçim tekrar serbest
     unfreezeTimer = setTimeout(() => {
       isFrozen = false;
     }, 700); // bıraktıktan 0.7 saniye sonra sönmeye devam etsin
