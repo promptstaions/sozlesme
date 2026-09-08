@@ -180,6 +180,16 @@
   @media (max-width: 1400px){
     .photo-banner{ display: none; }
   }
+
+  /* imleç arkasında parlayan (glow) çizgi efekti */
+  #cursorTrail{
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; /* tıklamaları/hover'ı engellemesin */
+    z-index: 9999;
+  }
 </style>
 </head>
 <body>
@@ -204,6 +214,8 @@
 <div class="photo-banner" style="top:25%; left:80px; transform: translateY(-50%);">
   <img src="yes.jpg" alt="foto" />
 </div>
+
+<canvas id="cursorTrail"></canvas>
 
 <script>
   // ---- YENİ MADDE EKLEMEK İÇİN BURAYA SATIR EKLE ----
@@ -255,6 +267,72 @@
       aboutModal.classList.remove('open');
     }
   });
+
+  // --- İmleç arkasında parlayan (glow) çizgi ---
+  const canvas = document.getElementById('cursorTrail');
+  const ctx = canvas.getContext('2d');
+
+  function resizeCanvas(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  let points = []; // imlecin son geçtiği noktalar
+  let isFrozen = false;      // sol tık basılıyken true olur, sönme durur
+  let unfreezeTimer = null;  // bırakınca gecikmeli olarak sönmeyi tekrar başlatır
+
+  window.addEventListener('mousemove', (e) => {
+    points.push({ x: e.clientX, y: e.clientY, life: 1 });
+  });
+
+  window.addEventListener('mousedown', (e) => {
+    if (e.button !== 0) return; // sadece sol tık
+    isFrozen = true;
+    if (unfreezeTimer) clearTimeout(unfreezeTimer); // önceki bırakma zamanlayıcısını iptal et
+  });
+
+  window.addEventListener('mouseup', (e) => {
+    if (e.button !== 0) return; // sadece sol tık
+    unfreezeTimer = setTimeout(() => {
+      isFrozen = false;
+    }, 700); // bıraktıktan 0.7 saniye sonra sönmeye devam etsin
+  });
+
+  function drawTrail(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // sol tık basılıyken (isFrozen) noktaları SÖNDÜRME, olduğu gibi kalsın
+    if (!isFrozen) {
+      points.forEach(p => p.life -= 0.03);
+      points = points.filter(p => p.life > 0);
+    }
+
+    ctx.lineJoin = 'round';
+    ctx.lineCap = 'round';
+
+    for (let i = 1; i < points.length; i++) {
+      const p1 = points[i - 1];
+      const p2 = points[i];
+      const opacity = Math.min(p1.life, p2.life);
+
+      ctx.beginPath();
+      ctx.moveTo(p1.x, p1.y);
+      ctx.lineTo(p2.x, p2.y);
+
+      // parlama (glow) efekti — shadowBlur ile
+      ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+      ctx.shadowColor = 'rgba(120, 190, 255, 0.9)'; // glow rengi, istersen değiştir
+      ctx.shadowBlur = 14;
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+    }
+
+    requestAnimationFrame(drawTrail);
+  }
+
+  drawTrail();
 </script>
 
 </body>
